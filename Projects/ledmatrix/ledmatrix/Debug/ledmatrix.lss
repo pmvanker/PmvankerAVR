@@ -1,0 +1,1277 @@
+
+ledmatrix.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000084e  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000300  00800060  0000084e  000008e2  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000009d  00800360  00800360  00000be2  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000be2  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000058  00000000  00000000  00000c12  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000003ee  00000000  00000000  00000c6a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000184  00000000  00000000  00001058  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002ec  00000000  00000000  000011dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f0  00000000  00000000  000014c8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000001c7  00000000  00000000  000015b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000b8b  00000000  00000000  0000177f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000048  00000000  00000000  0000230a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	13 e0       	ldi	r17, 0x03	; 3
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	ee e4       	ldi	r30, 0x4E	; 78
+  3a:	f8 e0       	ldi	r31, 0x08	; 8
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a0 36       	cpi	r26, 0x60	; 96
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	23 e0       	ldi	r18, 0x03	; 3
+  4a:	a0 e6       	ldi	r26, 0x60	; 96
+  4c:	b3 e0       	ldi	r27, 0x03	; 3
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	ad 3f       	cpi	r26, 0xFD	; 253
+  54:	b2 07       	cpc	r27, r18
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	de d3       	rcall	.+1980   	; 0x816 <main>
+  5a:	f7 c3       	rjmp	.+2030   	; 0x84a <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <compare_C>:
+	compare_C('L');
+	fd[2]=dch;
+	compare_C('U');
+	fd[3]=dch;
+	compare_C('F');
+	fd[4]=dch;
+  5e:	80 32       	cpi	r24, 0x20	; 32
+  60:	29 f4       	brne	.+10     	; 0x6c <compare_C+0xe>
+  62:	10 92 63 03 	sts	0x0363, r1
+	compare_C('A');
+  66:	10 92 62 03 	sts	0x0362, r1
+	fd[5]=dch;
+  6a:	08 95       	ret
+  6c:	81 32       	cpi	r24, 0x21	; 33
+  6e:	39 f4       	brne	.+14     	; 0x7e <compare_C+0x20>
+  70:	81 e0       	ldi	r24, 0x01	; 1
+  72:	90 e0       	ldi	r25, 0x00	; 0
+  74:	90 93 63 03 	sts	0x0363, r25
+	compare_C('R');
+  78:	80 93 62 03 	sts	0x0362, r24
+	fd[6]=dch;
+  7c:	08 95       	ret
+  7e:	82 32       	cpi	r24, 0x22	; 34
+  80:	39 f4       	brne	.+14     	; 0x90 <compare_C+0x32>
+  82:	82 e0       	ldi	r24, 0x02	; 2
+  84:	90 e0       	ldi	r25, 0x00	; 0
+  86:	90 93 63 03 	sts	0x0363, r25
+  8a:	80 93 62 03 	sts	0x0362, r24
+	compare_C('P');
+  8e:	08 95       	ret
+	fd[7]=dch;
+  90:	83 32       	cpi	r24, 0x23	; 35
+  92:	39 f4       	brne	.+14     	; 0xa2 <compare_C+0x44>
+  94:	83 e0       	ldi	r24, 0x03	; 3
+  96:	90 e0       	ldi	r25, 0x00	; 0
+  98:	90 93 63 03 	sts	0x0363, r25
+  9c:	80 93 62 03 	sts	0x0362, r24
+	data_insert();
+  a0:	08 95       	ret
+  a2:	84 32       	cpi	r24, 0x24	; 36
+	{dch=1;}
+	else if (ch=='"')
+	{dch=2;}
+	else if (ch=='#')
+	{dch=3;}
+	else if (ch=='$')
+  a4:	39 f4       	brne	.+14     	; 0xb4 <compare_C+0x56>
+	{dch=4;}
+  a6:	84 e0       	ldi	r24, 0x04	; 4
+  a8:	90 e0       	ldi	r25, 0x00	; 0
+  aa:	90 93 63 03 	sts	0x0363, r25
+  ae:	80 93 62 03 	sts	0x0362, r24
+  b2:	08 95       	ret
+	else if (ch=='%')
+  b4:	85 32       	cpi	r24, 0x25	; 37
+  b6:	39 f4       	brne	.+14     	; 0xc6 <compare_C+0x68>
+	{dch=5;}
+  b8:	85 e0       	ldi	r24, 0x05	; 5
+  ba:	90 e0       	ldi	r25, 0x00	; 0
+  bc:	90 93 63 03 	sts	0x0363, r25
+  c0:	80 93 62 03 	sts	0x0362, r24
+  c4:	08 95       	ret
+	else if (ch=='&')
+  c6:	86 32       	cpi	r24, 0x26	; 38
+  c8:	39 f4       	brne	.+14     	; 0xd8 <compare_C+0x7a>
+	{dch=6;}
+  ca:	86 e0       	ldi	r24, 0x06	; 6
+  cc:	90 e0       	ldi	r25, 0x00	; 0
+  ce:	90 93 63 03 	sts	0x0363, r25
+  d2:	80 93 62 03 	sts	0x0362, r24
+  d6:	08 95       	ret
+//	else if (ch==''')
+//	{dch=7;}
+	else if (ch=='(')
+  d8:	88 32       	cpi	r24, 0x28	; 40
+  da:	39 f4       	brne	.+14     	; 0xea <compare_C+0x8c>
+	{dch=8;}
+  dc:	88 e0       	ldi	r24, 0x08	; 8
+  de:	90 e0       	ldi	r25, 0x00	; 0
+  e0:	90 93 63 03 	sts	0x0363, r25
+  e4:	80 93 62 03 	sts	0x0362, r24
+  e8:	08 95       	ret
+	else if (ch==')')
+  ea:	89 32       	cpi	r24, 0x29	; 41
+  ec:	39 f4       	brne	.+14     	; 0xfc <compare_C+0x9e>
+	{dch=9;}
+  ee:	89 e0       	ldi	r24, 0x09	; 9
+  f0:	90 e0       	ldi	r25, 0x00	; 0
+  f2:	90 93 63 03 	sts	0x0363, r25
+  f6:	80 93 62 03 	sts	0x0362, r24
+  fa:	08 95       	ret
+	else if (ch=='*')
+  fc:	8a 32       	cpi	r24, 0x2A	; 42
+  fe:	39 f4       	brne	.+14     	; 0x10e <compare_C+0xb0>
+	{dch=10;}
+ 100:	8a e0       	ldi	r24, 0x0A	; 10
+ 102:	90 e0       	ldi	r25, 0x00	; 0
+ 104:	90 93 63 03 	sts	0x0363, r25
+ 108:	80 93 62 03 	sts	0x0362, r24
+ 10c:	08 95       	ret
+	else if (ch=='+')
+ 10e:	8b 32       	cpi	r24, 0x2B	; 43
+ 110:	39 f4       	brne	.+14     	; 0x120 <compare_C+0xc2>
+	{dch=11;}
+ 112:	8b e0       	ldi	r24, 0x0B	; 11
+ 114:	90 e0       	ldi	r25, 0x00	; 0
+ 116:	90 93 63 03 	sts	0x0363, r25
+ 11a:	80 93 62 03 	sts	0x0362, r24
+ 11e:	08 95       	ret
+	else if (ch==',')
+ 120:	8c 32       	cpi	r24, 0x2C	; 44
+ 122:	39 f4       	brne	.+14     	; 0x132 <compare_C+0xd4>
+	{dch=12;}
+ 124:	8c e0       	ldi	r24, 0x0C	; 12
+ 126:	90 e0       	ldi	r25, 0x00	; 0
+ 128:	90 93 63 03 	sts	0x0363, r25
+ 12c:	80 93 62 03 	sts	0x0362, r24
+ 130:	08 95       	ret
+	else if (ch=='-')
+ 132:	8d 32       	cpi	r24, 0x2D	; 45
+ 134:	39 f4       	brne	.+14     	; 0x144 <compare_C+0xe6>
+	{dch=13;}
+ 136:	8d e0       	ldi	r24, 0x0D	; 13
+ 138:	90 e0       	ldi	r25, 0x00	; 0
+ 13a:	90 93 63 03 	sts	0x0363, r25
+ 13e:	80 93 62 03 	sts	0x0362, r24
+ 142:	08 95       	ret
+	else if (ch=='.')
+ 144:	8e 32       	cpi	r24, 0x2E	; 46
+ 146:	39 f4       	brne	.+14     	; 0x156 <compare_C+0xf8>
+	{dch=14;}
+ 148:	8e e0       	ldi	r24, 0x0E	; 14
+ 14a:	90 e0       	ldi	r25, 0x00	; 0
+ 14c:	90 93 63 03 	sts	0x0363, r25
+ 150:	80 93 62 03 	sts	0x0362, r24
+ 154:	08 95       	ret
+	else if (ch=='/')
+ 156:	8f 32       	cpi	r24, 0x2F	; 47
+ 158:	39 f4       	brne	.+14     	; 0x168 <compare_C+0x10a>
+	{dch=15;}
+ 15a:	8f e0       	ldi	r24, 0x0F	; 15
+ 15c:	90 e0       	ldi	r25, 0x00	; 0
+ 15e:	90 93 63 03 	sts	0x0363, r25
+ 162:	80 93 62 03 	sts	0x0362, r24
+ 166:	08 95       	ret
+	else if (ch=='0')
+ 168:	80 33       	cpi	r24, 0x30	; 48
+ 16a:	39 f4       	brne	.+14     	; 0x17a <compare_C+0x11c>
+	{dch=16;}
+ 16c:	80 e1       	ldi	r24, 0x10	; 16
+ 16e:	90 e0       	ldi	r25, 0x00	; 0
+ 170:	90 93 63 03 	sts	0x0363, r25
+ 174:	80 93 62 03 	sts	0x0362, r24
+ 178:	08 95       	ret
+	else if (ch=='1')
+ 17a:	81 33       	cpi	r24, 0x31	; 49
+ 17c:	39 f4       	brne	.+14     	; 0x18c <compare_C+0x12e>
+	{dch=17;}
+ 17e:	81 e1       	ldi	r24, 0x11	; 17
+ 180:	90 e0       	ldi	r25, 0x00	; 0
+ 182:	90 93 63 03 	sts	0x0363, r25
+ 186:	80 93 62 03 	sts	0x0362, r24
+ 18a:	08 95       	ret
+	else if (ch=='2')
+ 18c:	82 33       	cpi	r24, 0x32	; 50
+ 18e:	39 f4       	brne	.+14     	; 0x19e <compare_C+0x140>
+	{dch=18;}
+ 190:	82 e1       	ldi	r24, 0x12	; 18
+ 192:	90 e0       	ldi	r25, 0x00	; 0
+ 194:	90 93 63 03 	sts	0x0363, r25
+ 198:	80 93 62 03 	sts	0x0362, r24
+ 19c:	08 95       	ret
+	else if (ch=='3')
+ 19e:	83 33       	cpi	r24, 0x33	; 51
+ 1a0:	39 f4       	brne	.+14     	; 0x1b0 <compare_C+0x152>
+	{dch=19;}
+ 1a2:	83 e1       	ldi	r24, 0x13	; 19
+ 1a4:	90 e0       	ldi	r25, 0x00	; 0
+ 1a6:	90 93 63 03 	sts	0x0363, r25
+ 1aa:	80 93 62 03 	sts	0x0362, r24
+ 1ae:	08 95       	ret
+	else if (ch=='4')
+ 1b0:	84 33       	cpi	r24, 0x34	; 52
+ 1b2:	39 f4       	brne	.+14     	; 0x1c2 <compare_C+0x164>
+	{dch=20;}
+ 1b4:	84 e1       	ldi	r24, 0x14	; 20
+ 1b6:	90 e0       	ldi	r25, 0x00	; 0
+ 1b8:	90 93 63 03 	sts	0x0363, r25
+ 1bc:	80 93 62 03 	sts	0x0362, r24
+ 1c0:	08 95       	ret
+	else if (ch=='5')
+ 1c2:	85 33       	cpi	r24, 0x35	; 53
+ 1c4:	39 f4       	brne	.+14     	; 0x1d4 <compare_C+0x176>
+	{dch=21;}
+ 1c6:	85 e1       	ldi	r24, 0x15	; 21
+ 1c8:	90 e0       	ldi	r25, 0x00	; 0
+ 1ca:	90 93 63 03 	sts	0x0363, r25
+ 1ce:	80 93 62 03 	sts	0x0362, r24
+ 1d2:	08 95       	ret
+	else if (ch=='6')
+ 1d4:	86 33       	cpi	r24, 0x36	; 54
+ 1d6:	39 f4       	brne	.+14     	; 0x1e6 <compare_C+0x188>
+	{dch=22;}
+ 1d8:	86 e1       	ldi	r24, 0x16	; 22
+ 1da:	90 e0       	ldi	r25, 0x00	; 0
+ 1dc:	90 93 63 03 	sts	0x0363, r25
+ 1e0:	80 93 62 03 	sts	0x0362, r24
+ 1e4:	08 95       	ret
+	else if (ch=='7')
+ 1e6:	87 33       	cpi	r24, 0x37	; 55
+ 1e8:	39 f4       	brne	.+14     	; 0x1f8 <compare_C+0x19a>
+	{dch=23;}
+ 1ea:	87 e1       	ldi	r24, 0x17	; 23
+ 1ec:	90 e0       	ldi	r25, 0x00	; 0
+ 1ee:	90 93 63 03 	sts	0x0363, r25
+ 1f2:	80 93 62 03 	sts	0x0362, r24
+ 1f6:	08 95       	ret
+	else if (ch=='8')
+ 1f8:	88 33       	cpi	r24, 0x38	; 56
+ 1fa:	39 f4       	brne	.+14     	; 0x20a <compare_C+0x1ac>
+	{dch=24;}
+ 1fc:	88 e1       	ldi	r24, 0x18	; 24
+ 1fe:	90 e0       	ldi	r25, 0x00	; 0
+ 200:	90 93 63 03 	sts	0x0363, r25
+ 204:	80 93 62 03 	sts	0x0362, r24
+ 208:	08 95       	ret
+	else if (ch=='9')
+ 20a:	89 33       	cpi	r24, 0x39	; 57
+ 20c:	39 f4       	brne	.+14     	; 0x21c <compare_C+0x1be>
+	{dch=25;}
+ 20e:	89 e1       	ldi	r24, 0x19	; 25
+ 210:	90 e0       	ldi	r25, 0x00	; 0
+ 212:	90 93 63 03 	sts	0x0363, r25
+ 216:	80 93 62 03 	sts	0x0362, r24
+ 21a:	08 95       	ret
+	else if (ch==':')
+ 21c:	8a 33       	cpi	r24, 0x3A	; 58
+ 21e:	39 f4       	brne	.+14     	; 0x22e <compare_C+0x1d0>
+	{dch=26;}
+ 220:	8a e1       	ldi	r24, 0x1A	; 26
+ 222:	90 e0       	ldi	r25, 0x00	; 0
+ 224:	90 93 63 03 	sts	0x0363, r25
+ 228:	80 93 62 03 	sts	0x0362, r24
+ 22c:	08 95       	ret
+	else if (ch==';')
+ 22e:	8b 33       	cpi	r24, 0x3B	; 59
+ 230:	39 f4       	brne	.+14     	; 0x240 <compare_C+0x1e2>
+	{dch=27;}
+ 232:	8b e1       	ldi	r24, 0x1B	; 27
+ 234:	90 e0       	ldi	r25, 0x00	; 0
+ 236:	90 93 63 03 	sts	0x0363, r25
+ 23a:	80 93 62 03 	sts	0x0362, r24
+ 23e:	08 95       	ret
+	else if (ch=='<')
+ 240:	8c 33       	cpi	r24, 0x3C	; 60
+ 242:	39 f4       	brne	.+14     	; 0x252 <compare_C+0x1f4>
+	{dch=28;}
+ 244:	8c e1       	ldi	r24, 0x1C	; 28
+ 246:	90 e0       	ldi	r25, 0x00	; 0
+ 248:	90 93 63 03 	sts	0x0363, r25
+ 24c:	80 93 62 03 	sts	0x0362, r24
+ 250:	08 95       	ret
+	else if (ch=='=')
+ 252:	8d 33       	cpi	r24, 0x3D	; 61
+ 254:	39 f4       	brne	.+14     	; 0x264 <compare_C+0x206>
+	{dch=29;}
+ 256:	8d e1       	ldi	r24, 0x1D	; 29
+ 258:	90 e0       	ldi	r25, 0x00	; 0
+ 25a:	90 93 63 03 	sts	0x0363, r25
+ 25e:	80 93 62 03 	sts	0x0362, r24
+ 262:	08 95       	ret
+	else if (ch=='>')
+ 264:	8e 33       	cpi	r24, 0x3E	; 62
+ 266:	39 f4       	brne	.+14     	; 0x276 <compare_C+0x218>
+	{dch=30;}
+ 268:	8e e1       	ldi	r24, 0x1E	; 30
+ 26a:	90 e0       	ldi	r25, 0x00	; 0
+ 26c:	90 93 63 03 	sts	0x0363, r25
+ 270:	80 93 62 03 	sts	0x0362, r24
+ 274:	08 95       	ret
+	else if (ch=='?')
+ 276:	8f 33       	cpi	r24, 0x3F	; 63
+ 278:	39 f4       	brne	.+14     	; 0x288 <compare_C+0x22a>
+	{dch=31;}
+ 27a:	8f e1       	ldi	r24, 0x1F	; 31
+ 27c:	90 e0       	ldi	r25, 0x00	; 0
+ 27e:	90 93 63 03 	sts	0x0363, r25
+ 282:	80 93 62 03 	sts	0x0362, r24
+ 286:	08 95       	ret
+	else if (ch=='@')
+ 288:	80 34       	cpi	r24, 0x40	; 64
+ 28a:	39 f4       	brne	.+14     	; 0x29a <compare_C+0x23c>
+	{dch=32;}
+ 28c:	80 e2       	ldi	r24, 0x20	; 32
+ 28e:	90 e0       	ldi	r25, 0x00	; 0
+ 290:	90 93 63 03 	sts	0x0363, r25
+ 294:	80 93 62 03 	sts	0x0362, r24
+ 298:	08 95       	ret
+	else if (ch=='A')
+ 29a:	81 34       	cpi	r24, 0x41	; 65
+ 29c:	39 f4       	brne	.+14     	; 0x2ac <compare_C+0x24e>
+	{dch=33;}
+ 29e:	81 e2       	ldi	r24, 0x21	; 33
+ 2a0:	90 e0       	ldi	r25, 0x00	; 0
+ 2a2:	90 93 63 03 	sts	0x0363, r25
+ 2a6:	80 93 62 03 	sts	0x0362, r24
+ 2aa:	08 95       	ret
+	else if (ch=='B')
+ 2ac:	82 34       	cpi	r24, 0x42	; 66
+ 2ae:	39 f4       	brne	.+14     	; 0x2be <compare_C+0x260>
+	{dch=34;}
+ 2b0:	82 e2       	ldi	r24, 0x22	; 34
+ 2b2:	90 e0       	ldi	r25, 0x00	; 0
+ 2b4:	90 93 63 03 	sts	0x0363, r25
+ 2b8:	80 93 62 03 	sts	0x0362, r24
+ 2bc:	08 95       	ret
+	else if (ch=='C')
+ 2be:	83 34       	cpi	r24, 0x43	; 67
+ 2c0:	39 f4       	brne	.+14     	; 0x2d0 <compare_C+0x272>
+	{dch=35;}
+ 2c2:	83 e2       	ldi	r24, 0x23	; 35
+ 2c4:	90 e0       	ldi	r25, 0x00	; 0
+ 2c6:	90 93 63 03 	sts	0x0363, r25
+ 2ca:	80 93 62 03 	sts	0x0362, r24
+ 2ce:	08 95       	ret
+	else if (ch=='D')
+ 2d0:	84 34       	cpi	r24, 0x44	; 68
+ 2d2:	39 f4       	brne	.+14     	; 0x2e2 <compare_C+0x284>
+	{dch=36;}
+ 2d4:	84 e2       	ldi	r24, 0x24	; 36
+ 2d6:	90 e0       	ldi	r25, 0x00	; 0
+ 2d8:	90 93 63 03 	sts	0x0363, r25
+ 2dc:	80 93 62 03 	sts	0x0362, r24
+ 2e0:	08 95       	ret
+	else if (ch=='E')
+ 2e2:	85 34       	cpi	r24, 0x45	; 69
+ 2e4:	39 f4       	brne	.+14     	; 0x2f4 <compare_C+0x296>
+	{dch=37;}
+ 2e6:	85 e2       	ldi	r24, 0x25	; 37
+ 2e8:	90 e0       	ldi	r25, 0x00	; 0
+ 2ea:	90 93 63 03 	sts	0x0363, r25
+ 2ee:	80 93 62 03 	sts	0x0362, r24
+ 2f2:	08 95       	ret
+	else if (ch=='F')
+ 2f4:	86 34       	cpi	r24, 0x46	; 70
+ 2f6:	39 f4       	brne	.+14     	; 0x306 <compare_C+0x2a8>
+	{dch=38;}
+ 2f8:	86 e2       	ldi	r24, 0x26	; 38
+ 2fa:	90 e0       	ldi	r25, 0x00	; 0
+ 2fc:	90 93 63 03 	sts	0x0363, r25
+ 300:	80 93 62 03 	sts	0x0362, r24
+ 304:	08 95       	ret
+	else if (ch=='G')
+ 306:	87 34       	cpi	r24, 0x47	; 71
+ 308:	39 f4       	brne	.+14     	; 0x318 <compare_C+0x2ba>
+	{dch=39;}
+ 30a:	87 e2       	ldi	r24, 0x27	; 39
+ 30c:	90 e0       	ldi	r25, 0x00	; 0
+ 30e:	90 93 63 03 	sts	0x0363, r25
+ 312:	80 93 62 03 	sts	0x0362, r24
+ 316:	08 95       	ret
+	else if (ch=='H')
+ 318:	88 34       	cpi	r24, 0x48	; 72
+ 31a:	39 f4       	brne	.+14     	; 0x32a <compare_C+0x2cc>
+	{dch=40;}
+ 31c:	88 e2       	ldi	r24, 0x28	; 40
+ 31e:	90 e0       	ldi	r25, 0x00	; 0
+ 320:	90 93 63 03 	sts	0x0363, r25
+ 324:	80 93 62 03 	sts	0x0362, r24
+ 328:	08 95       	ret
+	else if (ch=='I')
+ 32a:	89 34       	cpi	r24, 0x49	; 73
+ 32c:	39 f4       	brne	.+14     	; 0x33c <compare_C+0x2de>
+	{dch=41;}
+ 32e:	89 e2       	ldi	r24, 0x29	; 41
+ 330:	90 e0       	ldi	r25, 0x00	; 0
+ 332:	90 93 63 03 	sts	0x0363, r25
+ 336:	80 93 62 03 	sts	0x0362, r24
+ 33a:	08 95       	ret
+	else if (ch=='J')
+ 33c:	8a 34       	cpi	r24, 0x4A	; 74
+ 33e:	39 f4       	brne	.+14     	; 0x34e <compare_C+0x2f0>
+	{dch=42;}
+ 340:	8a e2       	ldi	r24, 0x2A	; 42
+ 342:	90 e0       	ldi	r25, 0x00	; 0
+ 344:	90 93 63 03 	sts	0x0363, r25
+ 348:	80 93 62 03 	sts	0x0362, r24
+ 34c:	08 95       	ret
+	else if (ch=='K')
+ 34e:	8b 34       	cpi	r24, 0x4B	; 75
+ 350:	39 f4       	brne	.+14     	; 0x360 <compare_C+0x302>
+	{dch=43;}
+ 352:	8b e2       	ldi	r24, 0x2B	; 43
+ 354:	90 e0       	ldi	r25, 0x00	; 0
+ 356:	90 93 63 03 	sts	0x0363, r25
+ 35a:	80 93 62 03 	sts	0x0362, r24
+ 35e:	08 95       	ret
+	else if (ch=='L')
+ 360:	8c 34       	cpi	r24, 0x4C	; 76
+ 362:	39 f4       	brne	.+14     	; 0x372 <compare_C+0x314>
+	{dch=44;}
+ 364:	8c e2       	ldi	r24, 0x2C	; 44
+ 366:	90 e0       	ldi	r25, 0x00	; 0
+ 368:	90 93 63 03 	sts	0x0363, r25
+ 36c:	80 93 62 03 	sts	0x0362, r24
+ 370:	08 95       	ret
+	else if (ch=='M')
+ 372:	8d 34       	cpi	r24, 0x4D	; 77
+ 374:	39 f4       	brne	.+14     	; 0x384 <compare_C+0x326>
+	{dch=45;}
+ 376:	8d e2       	ldi	r24, 0x2D	; 45
+ 378:	90 e0       	ldi	r25, 0x00	; 0
+ 37a:	90 93 63 03 	sts	0x0363, r25
+ 37e:	80 93 62 03 	sts	0x0362, r24
+ 382:	08 95       	ret
+	else if (ch=='N')
+ 384:	8e 34       	cpi	r24, 0x4E	; 78
+ 386:	39 f4       	brne	.+14     	; 0x396 <compare_C+0x338>
+	{dch=46;}
+ 388:	8e e2       	ldi	r24, 0x2E	; 46
+ 38a:	90 e0       	ldi	r25, 0x00	; 0
+ 38c:	90 93 63 03 	sts	0x0363, r25
+ 390:	80 93 62 03 	sts	0x0362, r24
+ 394:	08 95       	ret
+	else if (ch=='O')
+ 396:	8f 34       	cpi	r24, 0x4F	; 79
+ 398:	39 f4       	brne	.+14     	; 0x3a8 <compare_C+0x34a>
+	{dch=47;}
+ 39a:	8f e2       	ldi	r24, 0x2F	; 47
+ 39c:	90 e0       	ldi	r25, 0x00	; 0
+ 39e:	90 93 63 03 	sts	0x0363, r25
+ 3a2:	80 93 62 03 	sts	0x0362, r24
+ 3a6:	08 95       	ret
+	else if (ch=='P')
+ 3a8:	80 35       	cpi	r24, 0x50	; 80
+ 3aa:	39 f4       	brne	.+14     	; 0x3ba <compare_C+0x35c>
+	{dch=48;}
+ 3ac:	80 e3       	ldi	r24, 0x30	; 48
+ 3ae:	90 e0       	ldi	r25, 0x00	; 0
+ 3b0:	90 93 63 03 	sts	0x0363, r25
+ 3b4:	80 93 62 03 	sts	0x0362, r24
+ 3b8:	08 95       	ret
+	else if (ch=='Q')
+ 3ba:	81 35       	cpi	r24, 0x51	; 81
+ 3bc:	39 f4       	brne	.+14     	; 0x3cc <compare_C+0x36e>
+	{dch=49;}
+ 3be:	81 e3       	ldi	r24, 0x31	; 49
+ 3c0:	90 e0       	ldi	r25, 0x00	; 0
+ 3c2:	90 93 63 03 	sts	0x0363, r25
+ 3c6:	80 93 62 03 	sts	0x0362, r24
+ 3ca:	08 95       	ret
+	else if (ch=='R')
+ 3cc:	82 35       	cpi	r24, 0x52	; 82
+ 3ce:	39 f4       	brne	.+14     	; 0x3de <compare_C+0x380>
+	{dch=50;}
+ 3d0:	82 e3       	ldi	r24, 0x32	; 50
+ 3d2:	90 e0       	ldi	r25, 0x00	; 0
+ 3d4:	90 93 63 03 	sts	0x0363, r25
+ 3d8:	80 93 62 03 	sts	0x0362, r24
+ 3dc:	08 95       	ret
+	else if (ch=='S')
+ 3de:	83 35       	cpi	r24, 0x53	; 83
+ 3e0:	39 f4       	brne	.+14     	; 0x3f0 <compare_C+0x392>
+	{dch=51;}
+ 3e2:	83 e3       	ldi	r24, 0x33	; 51
+ 3e4:	90 e0       	ldi	r25, 0x00	; 0
+ 3e6:	90 93 63 03 	sts	0x0363, r25
+ 3ea:	80 93 62 03 	sts	0x0362, r24
+ 3ee:	08 95       	ret
+	else if (ch=='T')
+ 3f0:	84 35       	cpi	r24, 0x54	; 84
+ 3f2:	39 f4       	brne	.+14     	; 0x402 <compare_C+0x3a4>
+	{dch=52;}
+ 3f4:	84 e3       	ldi	r24, 0x34	; 52
+ 3f6:	90 e0       	ldi	r25, 0x00	; 0
+ 3f8:	90 93 63 03 	sts	0x0363, r25
+ 3fc:	80 93 62 03 	sts	0x0362, r24
+ 400:	08 95       	ret
+	else if (ch=='U')
+ 402:	85 35       	cpi	r24, 0x55	; 85
+ 404:	39 f4       	brne	.+14     	; 0x414 <compare_C+0x3b6>
+	{dch=53;}
+ 406:	85 e3       	ldi	r24, 0x35	; 53
+ 408:	90 e0       	ldi	r25, 0x00	; 0
+ 40a:	90 93 63 03 	sts	0x0363, r25
+ 40e:	80 93 62 03 	sts	0x0362, r24
+ 412:	08 95       	ret
+	else if (ch=='V')
+ 414:	86 35       	cpi	r24, 0x56	; 86
+ 416:	39 f4       	brne	.+14     	; 0x426 <compare_C+0x3c8>
+	{dch=54;}
+ 418:	86 e3       	ldi	r24, 0x36	; 54
+ 41a:	90 e0       	ldi	r25, 0x00	; 0
+ 41c:	90 93 63 03 	sts	0x0363, r25
+ 420:	80 93 62 03 	sts	0x0362, r24
+ 424:	08 95       	ret
+	else if (ch=='W')
+ 426:	87 35       	cpi	r24, 0x57	; 87
+ 428:	39 f4       	brne	.+14     	; 0x438 <compare_C+0x3da>
+	{dch=55;}
+ 42a:	87 e3       	ldi	r24, 0x37	; 55
+ 42c:	90 e0       	ldi	r25, 0x00	; 0
+ 42e:	90 93 63 03 	sts	0x0363, r25
+ 432:	80 93 62 03 	sts	0x0362, r24
+ 436:	08 95       	ret
+	else if (ch=='X')
+ 438:	88 35       	cpi	r24, 0x58	; 88
+ 43a:	39 f4       	brne	.+14     	; 0x44a <compare_C+0x3ec>
+	{dch=56;}
+ 43c:	88 e3       	ldi	r24, 0x38	; 56
+ 43e:	90 e0       	ldi	r25, 0x00	; 0
+ 440:	90 93 63 03 	sts	0x0363, r25
+ 444:	80 93 62 03 	sts	0x0362, r24
+ 448:	08 95       	ret
+	else if (ch=='Y')
+ 44a:	89 35       	cpi	r24, 0x59	; 89
+ 44c:	39 f4       	brne	.+14     	; 0x45c <compare_C+0x3fe>
+	{dch=57;}
+ 44e:	89 e3       	ldi	r24, 0x39	; 57
+ 450:	90 e0       	ldi	r25, 0x00	; 0
+ 452:	90 93 63 03 	sts	0x0363, r25
+ 456:	80 93 62 03 	sts	0x0362, r24
+ 45a:	08 95       	ret
+	else if (ch=='Z')
+ 45c:	8a 35       	cpi	r24, 0x5A	; 90
+ 45e:	39 f4       	brne	.+14     	; 0x46e <__stack+0xf>
+	{dch=58;}
+ 460:	8a e3       	ldi	r24, 0x3A	; 58
+ 462:	90 e0       	ldi	r25, 0x00	; 0
+ 464:	90 93 63 03 	sts	0x0363, r25
+ 468:	80 93 62 03 	sts	0x0362, r24
+ 46c:	08 95       	ret
+	else if (ch=='[')
+ 46e:	8b 35       	cpi	r24, 0x5B	; 91
+ 470:	39 f4       	brne	.+14     	; 0x480 <__stack+0x21>
+	{dch=59;}
+ 472:	8b e3       	ldi	r24, 0x3B	; 59
+ 474:	90 e0       	ldi	r25, 0x00	; 0
+ 476:	90 93 63 03 	sts	0x0363, r25
+ 47a:	80 93 62 03 	sts	0x0362, r24
+ 47e:	08 95       	ret
+	else if (ch=='/')
+	{dch=60;}
+	else if (ch==']')
+ 480:	8d 35       	cpi	r24, 0x5D	; 93
+ 482:	39 f4       	brne	.+14     	; 0x492 <__stack+0x33>
+	{dch=61;}
+ 484:	8d e3       	ldi	r24, 0x3D	; 61
+ 486:	90 e0       	ldi	r25, 0x00	; 0
+ 488:	90 93 63 03 	sts	0x0363, r25
+ 48c:	80 93 62 03 	sts	0x0362, r24
+ 490:	08 95       	ret
+	else if (ch=='^')
+ 492:	8e 35       	cpi	r24, 0x5E	; 94
+ 494:	39 f4       	brne	.+14     	; 0x4a4 <__stack+0x45>
+	{dch=62;}
+ 496:	8e e3       	ldi	r24, 0x3E	; 62
+ 498:	90 e0       	ldi	r25, 0x00	; 0
+ 49a:	90 93 63 03 	sts	0x0363, r25
+ 49e:	80 93 62 03 	sts	0x0362, r24
+ 4a2:	08 95       	ret
+	else if (ch=='_')
+ 4a4:	8f 35       	cpi	r24, 0x5F	; 95
+ 4a6:	39 f4       	brne	.+14     	; 0x4b6 <__stack+0x57>
+	{dch=63;}
+ 4a8:	8f e3       	ldi	r24, 0x3F	; 63
+ 4aa:	90 e0       	ldi	r25, 0x00	; 0
+ 4ac:	90 93 63 03 	sts	0x0363, r25
+ 4b0:	80 93 62 03 	sts	0x0362, r24
+ 4b4:	08 95       	ret
+//	else if (ch=='"')
+//	{dch=64;}
+	else if (ch=='a')
+ 4b6:	81 36       	cpi	r24, 0x61	; 97
+ 4b8:	39 f4       	brne	.+14     	; 0x4c8 <__stack+0x69>
+	{dch=65;}
+ 4ba:	81 e4       	ldi	r24, 0x41	; 65
+ 4bc:	90 e0       	ldi	r25, 0x00	; 0
+ 4be:	90 93 63 03 	sts	0x0363, r25
+ 4c2:	80 93 62 03 	sts	0x0362, r24
+ 4c6:	08 95       	ret
+	else if (ch=='b')
+ 4c8:	82 36       	cpi	r24, 0x62	; 98
+ 4ca:	39 f4       	brne	.+14     	; 0x4da <__stack+0x7b>
+	{dch=66;}
+ 4cc:	82 e4       	ldi	r24, 0x42	; 66
+ 4ce:	90 e0       	ldi	r25, 0x00	; 0
+ 4d0:	90 93 63 03 	sts	0x0363, r25
+ 4d4:	80 93 62 03 	sts	0x0362, r24
+ 4d8:	08 95       	ret
+	else if (ch=='c')
+ 4da:	83 36       	cpi	r24, 0x63	; 99
+ 4dc:	39 f4       	brne	.+14     	; 0x4ec <__stack+0x8d>
+	{dch=67;}
+ 4de:	83 e4       	ldi	r24, 0x43	; 67
+ 4e0:	90 e0       	ldi	r25, 0x00	; 0
+ 4e2:	90 93 63 03 	sts	0x0363, r25
+ 4e6:	80 93 62 03 	sts	0x0362, r24
+ 4ea:	08 95       	ret
+	else if (ch=='d')
+ 4ec:	84 36       	cpi	r24, 0x64	; 100
+ 4ee:	39 f4       	brne	.+14     	; 0x4fe <__stack+0x9f>
+	{dch=68;}
+ 4f0:	84 e4       	ldi	r24, 0x44	; 68
+ 4f2:	90 e0       	ldi	r25, 0x00	; 0
+ 4f4:	90 93 63 03 	sts	0x0363, r25
+ 4f8:	80 93 62 03 	sts	0x0362, r24
+ 4fc:	08 95       	ret
+	else if (ch=='e')
+ 4fe:	85 36       	cpi	r24, 0x65	; 101
+ 500:	39 f4       	brne	.+14     	; 0x510 <__stack+0xb1>
+	{dch=69;}
+ 502:	85 e4       	ldi	r24, 0x45	; 69
+ 504:	90 e0       	ldi	r25, 0x00	; 0
+ 506:	90 93 63 03 	sts	0x0363, r25
+ 50a:	80 93 62 03 	sts	0x0362, r24
+ 50e:	08 95       	ret
+	else if (ch=='f')
+ 510:	86 36       	cpi	r24, 0x66	; 102
+ 512:	39 f4       	brne	.+14     	; 0x522 <__stack+0xc3>
+	{dch=70;}
+ 514:	86 e4       	ldi	r24, 0x46	; 70
+ 516:	90 e0       	ldi	r25, 0x00	; 0
+ 518:	90 93 63 03 	sts	0x0363, r25
+ 51c:	80 93 62 03 	sts	0x0362, r24
+ 520:	08 95       	ret
+	else if (ch=='g')
+ 522:	87 36       	cpi	r24, 0x67	; 103
+ 524:	39 f4       	brne	.+14     	; 0x534 <__stack+0xd5>
+	{dch=71;}
+ 526:	87 e4       	ldi	r24, 0x47	; 71
+ 528:	90 e0       	ldi	r25, 0x00	; 0
+ 52a:	90 93 63 03 	sts	0x0363, r25
+ 52e:	80 93 62 03 	sts	0x0362, r24
+ 532:	08 95       	ret
+	else if (ch=='h')
+ 534:	88 36       	cpi	r24, 0x68	; 104
+ 536:	39 f4       	brne	.+14     	; 0x546 <__stack+0xe7>
+	{dch=72;}
+ 538:	88 e4       	ldi	r24, 0x48	; 72
+ 53a:	90 e0       	ldi	r25, 0x00	; 0
+ 53c:	90 93 63 03 	sts	0x0363, r25
+ 540:	80 93 62 03 	sts	0x0362, r24
+ 544:	08 95       	ret
+	else if (ch=='i')
+ 546:	89 36       	cpi	r24, 0x69	; 105
+ 548:	39 f4       	brne	.+14     	; 0x558 <__stack+0xf9>
+	{dch=73;}
+ 54a:	89 e4       	ldi	r24, 0x49	; 73
+ 54c:	90 e0       	ldi	r25, 0x00	; 0
+ 54e:	90 93 63 03 	sts	0x0363, r25
+ 552:	80 93 62 03 	sts	0x0362, r24
+ 556:	08 95       	ret
+	else if (ch=='j')
+ 558:	8a 36       	cpi	r24, 0x6A	; 106
+ 55a:	39 f4       	brne	.+14     	; 0x56a <__stack+0x10b>
+	{dch=74;}
+ 55c:	8a e4       	ldi	r24, 0x4A	; 74
+ 55e:	90 e0       	ldi	r25, 0x00	; 0
+ 560:	90 93 63 03 	sts	0x0363, r25
+ 564:	80 93 62 03 	sts	0x0362, r24
+ 568:	08 95       	ret
+	else if (ch=='k')
+ 56a:	8b 36       	cpi	r24, 0x6B	; 107
+ 56c:	39 f4       	brne	.+14     	; 0x57c <__stack+0x11d>
+	{dch=75;}
+ 56e:	8b e4       	ldi	r24, 0x4B	; 75
+ 570:	90 e0       	ldi	r25, 0x00	; 0
+ 572:	90 93 63 03 	sts	0x0363, r25
+ 576:	80 93 62 03 	sts	0x0362, r24
+ 57a:	08 95       	ret
+	else if (ch=='l')
+ 57c:	8c 36       	cpi	r24, 0x6C	; 108
+ 57e:	39 f4       	brne	.+14     	; 0x58e <__stack+0x12f>
+	{dch=76;}
+ 580:	8c e4       	ldi	r24, 0x4C	; 76
+ 582:	90 e0       	ldi	r25, 0x00	; 0
+ 584:	90 93 63 03 	sts	0x0363, r25
+ 588:	80 93 62 03 	sts	0x0362, r24
+ 58c:	08 95       	ret
+	else if (ch=='m')
+ 58e:	8d 36       	cpi	r24, 0x6D	; 109
+ 590:	39 f4       	brne	.+14     	; 0x5a0 <__stack+0x141>
+	{dch=77;}
+ 592:	8d e4       	ldi	r24, 0x4D	; 77
+ 594:	90 e0       	ldi	r25, 0x00	; 0
+ 596:	90 93 63 03 	sts	0x0363, r25
+ 59a:	80 93 62 03 	sts	0x0362, r24
+ 59e:	08 95       	ret
+	else if (ch=='n')
+ 5a0:	8e 36       	cpi	r24, 0x6E	; 110
+ 5a2:	39 f4       	brne	.+14     	; 0x5b2 <__stack+0x153>
+	{dch=78;}
+ 5a4:	8e e4       	ldi	r24, 0x4E	; 78
+ 5a6:	90 e0       	ldi	r25, 0x00	; 0
+ 5a8:	90 93 63 03 	sts	0x0363, r25
+ 5ac:	80 93 62 03 	sts	0x0362, r24
+ 5b0:	08 95       	ret
+	else if (ch=='o')
+ 5b2:	8f 36       	cpi	r24, 0x6F	; 111
+ 5b4:	39 f4       	brne	.+14     	; 0x5c4 <__stack+0x165>
+	{dch=79;}
+ 5b6:	8f e4       	ldi	r24, 0x4F	; 79
+ 5b8:	90 e0       	ldi	r25, 0x00	; 0
+ 5ba:	90 93 63 03 	sts	0x0363, r25
+ 5be:	80 93 62 03 	sts	0x0362, r24
+ 5c2:	08 95       	ret
+	else if (ch=='p')
+ 5c4:	80 37       	cpi	r24, 0x70	; 112
+ 5c6:	39 f4       	brne	.+14     	; 0x5d6 <__stack+0x177>
+	{dch=80;}
+ 5c8:	80 e5       	ldi	r24, 0x50	; 80
+ 5ca:	90 e0       	ldi	r25, 0x00	; 0
+ 5cc:	90 93 63 03 	sts	0x0363, r25
+ 5d0:	80 93 62 03 	sts	0x0362, r24
+ 5d4:	08 95       	ret
+	else if (ch=='q')
+ 5d6:	81 37       	cpi	r24, 0x71	; 113
+ 5d8:	39 f4       	brne	.+14     	; 0x5e8 <__stack+0x189>
+	{dch=81;}
+ 5da:	81 e5       	ldi	r24, 0x51	; 81
+ 5dc:	90 e0       	ldi	r25, 0x00	; 0
+ 5de:	90 93 63 03 	sts	0x0363, r25
+ 5e2:	80 93 62 03 	sts	0x0362, r24
+ 5e6:	08 95       	ret
+	else if (ch=='r')
+ 5e8:	82 37       	cpi	r24, 0x72	; 114
+ 5ea:	39 f4       	brne	.+14     	; 0x5fa <__stack+0x19b>
+	{dch=82;}
+ 5ec:	82 e5       	ldi	r24, 0x52	; 82
+ 5ee:	90 e0       	ldi	r25, 0x00	; 0
+ 5f0:	90 93 63 03 	sts	0x0363, r25
+ 5f4:	80 93 62 03 	sts	0x0362, r24
+ 5f8:	08 95       	ret
+	else if (ch=='s')
+ 5fa:	83 37       	cpi	r24, 0x73	; 115
+ 5fc:	39 f4       	brne	.+14     	; 0x60c <__stack+0x1ad>
+	{dch=83;}
+ 5fe:	83 e5       	ldi	r24, 0x53	; 83
+ 600:	90 e0       	ldi	r25, 0x00	; 0
+ 602:	90 93 63 03 	sts	0x0363, r25
+ 606:	80 93 62 03 	sts	0x0362, r24
+ 60a:	08 95       	ret
+	else if (ch=='t')
+ 60c:	84 37       	cpi	r24, 0x74	; 116
+ 60e:	39 f4       	brne	.+14     	; 0x61e <__stack+0x1bf>
+	{dch=84;}
+ 610:	84 e5       	ldi	r24, 0x54	; 84
+ 612:	90 e0       	ldi	r25, 0x00	; 0
+ 614:	90 93 63 03 	sts	0x0363, r25
+ 618:	80 93 62 03 	sts	0x0362, r24
+ 61c:	08 95       	ret
+	else if (ch=='u')
+ 61e:	85 37       	cpi	r24, 0x75	; 117
+ 620:	39 f4       	brne	.+14     	; 0x630 <__stack+0x1d1>
+	{dch=85;}
+ 622:	85 e5       	ldi	r24, 0x55	; 85
+ 624:	90 e0       	ldi	r25, 0x00	; 0
+ 626:	90 93 63 03 	sts	0x0363, r25
+ 62a:	80 93 62 03 	sts	0x0362, r24
+ 62e:	08 95       	ret
+	else if (ch=='v')
+ 630:	86 37       	cpi	r24, 0x76	; 118
+ 632:	39 f4       	brne	.+14     	; 0x642 <__stack+0x1e3>
+	{dch=86;}
+ 634:	86 e5       	ldi	r24, 0x56	; 86
+ 636:	90 e0       	ldi	r25, 0x00	; 0
+ 638:	90 93 63 03 	sts	0x0363, r25
+ 63c:	80 93 62 03 	sts	0x0362, r24
+ 640:	08 95       	ret
+	else if (ch=='w')
+ 642:	87 37       	cpi	r24, 0x77	; 119
+ 644:	39 f4       	brne	.+14     	; 0x654 <__stack+0x1f5>
+	{dch=87;}
+ 646:	87 e5       	ldi	r24, 0x57	; 87
+ 648:	90 e0       	ldi	r25, 0x00	; 0
+ 64a:	90 93 63 03 	sts	0x0363, r25
+ 64e:	80 93 62 03 	sts	0x0362, r24
+ 652:	08 95       	ret
+	else if (ch=='x')
+ 654:	88 37       	cpi	r24, 0x78	; 120
+ 656:	39 f4       	brne	.+14     	; 0x666 <__stack+0x207>
+	{dch=88;}
+ 658:	88 e5       	ldi	r24, 0x58	; 88
+ 65a:	90 e0       	ldi	r25, 0x00	; 0
+ 65c:	90 93 63 03 	sts	0x0363, r25
+ 660:	80 93 62 03 	sts	0x0362, r24
+ 664:	08 95       	ret
+	else if (ch=='y')
+ 666:	89 37       	cpi	r24, 0x79	; 121
+ 668:	39 f4       	brne	.+14     	; 0x678 <__stack+0x219>
+	{dch=89;}
+ 66a:	89 e5       	ldi	r24, 0x59	; 89
+ 66c:	90 e0       	ldi	r25, 0x00	; 0
+ 66e:	90 93 63 03 	sts	0x0363, r25
+ 672:	80 93 62 03 	sts	0x0362, r24
+ 676:	08 95       	ret
+	else if (ch=='z')
+ 678:	8a 37       	cpi	r24, 0x7A	; 122
+ 67a:	39 f4       	brne	.+14     	; 0x68a <__stack+0x22b>
+	{dch=90;}
+ 67c:	8a e5       	ldi	r24, 0x5A	; 90
+ 67e:	90 e0       	ldi	r25, 0x00	; 0
+ 680:	90 93 63 03 	sts	0x0363, r25
+ 684:	80 93 62 03 	sts	0x0362, r24
+ 688:	08 95       	ret
+	else if (ch=='{')
+ 68a:	8b 37       	cpi	r24, 0x7B	; 123
+ 68c:	39 f4       	brne	.+14     	; 0x69c <__stack+0x23d>
+	{dch=91;}
+ 68e:	8b e5       	ldi	r24, 0x5B	; 91
+ 690:	90 e0       	ldi	r25, 0x00	; 0
+ 692:	90 93 63 03 	sts	0x0363, r25
+ 696:	80 93 62 03 	sts	0x0362, r24
+ 69a:	08 95       	ret
+	else if (ch=='|')
+ 69c:	8c 37       	cpi	r24, 0x7C	; 124
+ 69e:	39 f4       	brne	.+14     	; 0x6ae <__stack+0x24f>
+	{dch=92;}
+ 6a0:	8c e5       	ldi	r24, 0x5C	; 92
+ 6a2:	90 e0       	ldi	r25, 0x00	; 0
+ 6a4:	90 93 63 03 	sts	0x0363, r25
+ 6a8:	80 93 62 03 	sts	0x0362, r24
+ 6ac:	08 95       	ret
+	else if (ch=='}')
+ 6ae:	8d 37       	cpi	r24, 0x7D	; 125
+ 6b0:	39 f4       	brne	.+14     	; 0x6c0 <__stack+0x261>
+	{dch=93;}
+ 6b2:	8d e5       	ldi	r24, 0x5D	; 93
+ 6b4:	90 e0       	ldi	r25, 0x00	; 0
+ 6b6:	90 93 63 03 	sts	0x0363, r25
+ 6ba:	80 93 62 03 	sts	0x0362, r24
+ 6be:	08 95       	ret
+	else if (ch=='~')
+ 6c0:	8e 37       	cpi	r24, 0x7E	; 126
+ 6c2:	31 f4       	brne	.+12     	; 0x6d0 <__stack+0x271>
+	{dch=94;}
+ 6c4:	8e e5       	ldi	r24, 0x5E	; 94
+ 6c6:	90 e0       	ldi	r25, 0x00	; 0
+ 6c8:	90 93 63 03 	sts	0x0363, r25
+ 6cc:	80 93 62 03 	sts	0x0362, r24
+ 6d0:	08 95       	ret
+
+000006d2 <clock1>:
+}
+
+void clock1(void)
+{
+	PORTC |=(1<<clk);
+ 6d2:	a8 9a       	sbi	0x15, 0	; 21
+	PORTC &=~(1<<clk);
+ 6d4:	a8 98       	cbi	0x15, 0	; 21
+ 6d6:	08 95       	ret
+
+000006d8 <datash>:
+		dot_display();
+	}
+}
+
+void datash()
+{
+ 6d8:	cf 93       	push	r28
+ 6da:	df 93       	push	r29
+	int i;
+	clock1();
+ 6dc:	fa df       	rcall	.-12     	; 0x6d2 <clock1>
+	for(i=0;i<7;i++)
+ 6de:	c0 e0       	ldi	r28, 0x00	; 0
+ 6e0:	d0 e0       	ldi	r29, 0x00	; 0
+	{
+		if(((p>>i)&1)==1)
+ 6e2:	80 91 60 03 	lds	r24, 0x0360
+ 6e6:	90 91 61 03 	lds	r25, 0x0361
+ 6ea:	0c 2e       	mov	r0, r28
+ 6ec:	02 c0       	rjmp	.+4      	; 0x6f2 <datash+0x1a>
+ 6ee:	95 95       	asr	r25
+ 6f0:	87 95       	ror	r24
+ 6f2:	0a 94       	dec	r0
+ 6f4:	e2 f7       	brpl	.-8      	; 0x6ee <datash+0x16>
+ 6f6:	80 ff       	sbrs	r24, 0
+ 6f8:	02 c0       	rjmp	.+4      	; 0x6fe <datash+0x26>
+			PORTC|=(1<<data);
+ 6fa:	a9 9a       	sbi	0x15, 1	; 21
+ 6fc:	01 c0       	rjmp	.+2      	; 0x700 <datash+0x28>
+		else
+			PORTC&=~(1<<data);
+ 6fe:	a9 98       	cbi	0x15, 1	; 21
+		clock1();
+ 700:	e8 df       	rcall	.-48     	; 0x6d2 <clock1>
+
+void datash()
+{
+	int i;
+	clock1();
+	for(i=0;i<7;i++)
+ 702:	21 96       	adiw	r28, 0x01	; 1
+ 704:	c7 30       	cpi	r28, 0x07	; 7
+ 706:	d1 05       	cpc	r29, r1
+ 708:	61 f7       	brne	.-40     	; 0x6e2 <datash+0xa>
+			PORTC|=(1<<data);
+		else
+			PORTC&=~(1<<data);
+		clock1();
+	}
+}
+ 70a:	df 91       	pop	r29
+ 70c:	cf 91       	pop	r28
+ 70e:	08 95       	ret
+
+00000710 <datalatch>:
+	PORTC |=(1<<clk);
+	PORTC &=~(1<<clk);
+}
+void datalatch(void)
+{
+	PORTC &=~(1<<lch);
+ 710:	aa 98       	cbi	0x15, 2	; 21
+	PORTC |=(1<<lch);
+ 712:	aa 9a       	sbi	0x15, 2	; 21
+ 714:	08 95       	ret
+
+00000716 <dot_display>:
+			PORTC&=~(1<<data);
+		clock1();
+	}
+}
+void dot_display()
+{
+ 716:	8f 92       	push	r8
+ 718:	9f 92       	push	r9
+ 71a:	af 92       	push	r10
+ 71c:	bf 92       	push	r11
+ 71e:	cf 92       	push	r12
+ 720:	df 92       	push	r13
+ 722:	ef 92       	push	r14
+ 724:	ff 92       	push	r15
+ 726:	0f 93       	push	r16
+ 728:	1f 93       	push	r17
+ 72a:	cf 93       	push	r28
+ 72c:	df 93       	push	r29
+ 72e:	0f 2e       	mov	r0, r31
+ 730:	f4 e7       	ldi	r31, 0x74	; 116
+ 732:	cf 2e       	mov	r12, r31
+ 734:	f3 e0       	ldi	r31, 0x03	; 3
+ 736:	df 2e       	mov	r13, r31
+ 738:	f0 2d       	mov	r31, r0
+ 73a:	0f 2e       	mov	r0, r31
+ 73c:	f4 ee       	ldi	r31, 0xE4	; 228
+ 73e:	af 2e       	mov	r10, r31
+ 740:	f3 e0       	ldi	r31, 0x03	; 3
+ 742:	bf 2e       	mov	r11, r31
+ 744:	f0 2d       	mov	r31, r0
+ 746:	81 2c       	mov	r8, r1
+ 748:	91 2c       	mov	r9, r1
+		for (i=0;i<7;i++)
+		for(j=0;j<7;j++)
+		{
+			p=~dataarray[i][j];
+			datash();
+			PORTB=1<<j;
+ 74a:	ee 24       	eor	r14, r14
+ 74c:	e3 94       	inc	r14
+ 74e:	f1 2c       	mov	r15, r1
+ 750:	24 c0       	rjmp	.+72     	; 0x79a <dot_display+0x84>
+{
+	int i,j;
+		for (i=0;i<7;i++)
+		for(j=0;j<7;j++)
+		{
+			p=~dataarray[i][j];
+ 752:	f8 01       	movw	r30, r16
+ 754:	81 91       	ld	r24, Z+
+ 756:	91 91       	ld	r25, Z+
+ 758:	8f 01       	movw	r16, r30
+ 75a:	80 95       	com	r24
+ 75c:	90 95       	com	r25
+ 75e:	90 93 61 03 	sts	0x0361, r25
+ 762:	80 93 60 03 	sts	0x0360, r24
+			datash();
+ 766:	b8 df       	rcall	.-144    	; 0x6d8 <datash>
+			PORTB=1<<j;
+ 768:	c7 01       	movw	r24, r14
+ 76a:	0c 2e       	mov	r0, r28
+ 76c:	02 c0       	rjmp	.+4      	; 0x772 <dot_display+0x5c>
+ 76e:	88 0f       	add	r24, r24
+ 770:	99 1f       	adc	r25, r25
+ 772:	0a 94       	dec	r0
+ 774:	e2 f7       	brpl	.-8      	; 0x76e <dot_display+0x58>
+ 776:	88 bb       	out	0x18, r24	; 24
+			datalatch();
+ 778:	cb df       	rcall	.-106    	; 0x710 <datalatch>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 77a:	89 ef       	ldi	r24, 0xF9	; 249
+ 77c:	90 e0       	ldi	r25, 0x00	; 0
+ 77e:	01 97       	sbiw	r24, 0x01	; 1
+ 780:	f1 f7       	brne	.-4      	; 0x77e <dot_display+0x68>
+ 782:	00 c0       	rjmp	.+0      	; 0x784 <dot_display+0x6e>
+ 784:	00 00       	nop
+}
+void dot_display()
+{
+	int i,j;
+		for (i=0;i<7;i++)
+		for(j=0;j<7;j++)
+ 786:	21 96       	adiw	r28, 0x01	; 1
+ 788:	c7 30       	cpi	r28, 0x07	; 7
+ 78a:	d1 05       	cpc	r29, r1
+ 78c:	11 f7       	brne	.-60     	; 0x752 <dot_display+0x3c>
+ 78e:	90 e1       	ldi	r25, 0x10	; 16
+ 790:	c9 0e       	add	r12, r25
+ 792:	d1 1c       	adc	r13, r1
+	}
+}
+void dot_display()
+{
+	int i,j;
+		for (i=0;i<7;i++)
+ 794:	ca 14       	cp	r12, r10
+ 796:	db 04       	cpc	r13, r11
+ 798:	21 f0       	breq	.+8      	; 0x7a2 <dot_display+0x8c>
+			PORTC&=~(1<<data);
+		clock1();
+	}
+}
+void dot_display()
+{
+ 79a:	86 01       	movw	r16, r12
+ 79c:	c8 2d       	mov	r28, r8
+ 79e:	d9 2d       	mov	r29, r9
+ 7a0:	d8 cf       	rjmp	.-80     	; 0x752 <dot_display+0x3c>
+			datash();
+			PORTB=1<<j;
+			datalatch();
+			_delay_ms(1);
+		}
+}
+ 7a2:	df 91       	pop	r29
+ 7a4:	cf 91       	pop	r28
+ 7a6:	1f 91       	pop	r17
+ 7a8:	0f 91       	pop	r16
+ 7aa:	ff 90       	pop	r15
+ 7ac:	ef 90       	pop	r14
+ 7ae:	df 90       	pop	r13
+ 7b0:	cf 90       	pop	r12
+ 7b2:	bf 90       	pop	r11
+ 7b4:	af 90       	pop	r10
+ 7b6:	9f 90       	pop	r9
+ 7b8:	8f 90       	pop	r8
+ 7ba:	08 95       	ret
+
+000007bc <data_insert>:
+{
+	PORTC &=~(1<<lch);
+	PORTC |=(1<<lch);
+}
+void data_insert()
+{
+ 7bc:	0f 93       	push	r16
+ 7be:	1f 93       	push	r17
+ 7c0:	cf 93       	push	r28
+ 7c2:	df 93       	push	r29
+ 7c4:	c4 e6       	ldi	r28, 0x64	; 100
+ 7c6:	d3 e0       	ldi	r29, 0x03	; 3
+ 7c8:	44 e7       	ldi	r20, 0x74	; 116
+ 7ca:	53 e0       	ldi	r21, 0x03	; 3
+ 7cc:	64 e7       	ldi	r22, 0x74	; 116
+ 7ce:	73 e0       	ldi	r23, 0x03	; 3
+	int i,j;
+	for (i=0;i<8;i++)
+	for(j=0;j<8;j++)
+		dataarray[i][j]=arr[fd[i]][j];
+ 7d0:	00 e0       	ldi	r16, 0x00	; 0
+ 7d2:	10 e0       	ldi	r17, 0x00	; 0
+ 7d4:	0d c0       	rjmp	.+26     	; 0x7f0 <data_insert+0x34>
+ 7d6:	2d 91       	ld	r18, X+
+ 7d8:	30 e0       	ldi	r19, 0x00	; 0
+ 7da:	21 93       	st	Z+, r18
+ 7dc:	31 93       	st	Z+, r19
+}
+void data_insert()
+{
+	int i,j;
+	for (i=0;i<8;i++)
+	for(j=0;j<8;j++)
+ 7de:	01 96       	adiw	r24, 0x01	; 1
+ 7e0:	88 30       	cpi	r24, 0x08	; 8
+ 7e2:	91 05       	cpc	r25, r1
+ 7e4:	c1 f7       	brne	.-16     	; 0x7d6 <data_insert+0x1a>
+ 7e6:	40 5f       	subi	r20, 0xF0	; 240
+ 7e8:	5f 4f       	sbci	r21, 0xFF	; 255
+	PORTC |=(1<<lch);
+}
+void data_insert()
+{
+	int i,j;
+	for (i=0;i<8;i++)
+ 7ea:	c6 17       	cp	r28, r22
+ 7ec:	d7 07       	cpc	r29, r23
+ 7ee:	71 f0       	breq	.+28     	; 0x80c <data_insert+0x50>
+	for(j=0;j<8;j++)
+		dataarray[i][j]=arr[fd[i]][j];
+ 7f0:	a9 91       	ld	r26, Y+
+ 7f2:	b9 91       	ld	r27, Y+
+ 7f4:	aa 0f       	add	r26, r26
+ 7f6:	bb 1f       	adc	r27, r27
+ 7f8:	aa 0f       	add	r26, r26
+ 7fa:	bb 1f       	adc	r27, r27
+ 7fc:	aa 0f       	add	r26, r26
+ 7fe:	bb 1f       	adc	r27, r27
+ 800:	a9 59       	subi	r26, 0x99	; 153
+ 802:	bf 4f       	sbci	r27, 0xFF	; 255
+ 804:	fa 01       	movw	r30, r20
+ 806:	80 2f       	mov	r24, r16
+ 808:	91 2f       	mov	r25, r17
+ 80a:	e5 cf       	rjmp	.-54     	; 0x7d6 <data_insert+0x1a>
+}
+ 80c:	df 91       	pop	r29
+ 80e:	cf 91       	pop	r28
+ 810:	1f 91       	pop	r17
+ 812:	0f 91       	pop	r16
+ 814:	08 95       	ret
+
+00000816 <main>:
+void data_insert(void);
+void dot_display(void);
+char praful[]="PRAFUL";
+int main()
+{
+	DDRB = DDRC = 0xFF;
+ 816:	8f ef       	ldi	r24, 0xFF	; 255
+ 818:	84 bb       	out	0x14, r24	; 20
+ 81a:	87 bb       	out	0x17, r24	; 23
+
+	int i;
+	for(i=0;praful[i];i++)
+ 81c:	80 91 60 00 	lds	r24, 0x0060
+ 820:	88 23       	and	r24, r24
+ 822:	81 f0       	breq	.+32     	; 0x844 <main+0x2e>
+ 824:	04 e6       	ldi	r16, 0x64	; 100
+ 826:	13 e0       	ldi	r17, 0x03	; 3
+ 828:	c1 e6       	ldi	r28, 0x61	; 97
+ 82a:	d0 e0       	ldi	r29, 0x00	; 0
+	{
+		compare_C(praful[i]);
+ 82c:	18 dc       	rcall	.-2000   	; 0x5e <compare_C>
+		fd[i]=dch;
+ 82e:	80 91 62 03 	lds	r24, 0x0362
+ 832:	90 91 63 03 	lds	r25, 0x0363
+ 836:	f8 01       	movw	r30, r16
+ 838:	81 93       	st	Z+, r24
+ 83a:	91 93       	st	Z+, r25
+ 83c:	8f 01       	movw	r16, r30
+int main()
+{
+	DDRB = DDRC = 0xFF;
+
+	int i;
+	for(i=0;praful[i];i++)
+ 83e:	89 91       	ld	r24, Y+
+ 840:	81 11       	cpse	r24, r1
+ 842:	f4 cf       	rjmp	.-24     	; 0x82c <main+0x16>
+	{
+		compare_C(praful[i]);
+		fd[i]=dch;
+	}
+	data_insert();
+ 844:	bb df       	rcall	.-138    	; 0x7bc <data_insert>
+	while(1)
+	{
+		dot_display();
+ 846:	67 df       	rcall	.-306    	; 0x716 <dot_display>
+ 848:	fe cf       	rjmp	.-4      	; 0x846 <main+0x30>
+
+0000084a <_exit>:
+ 84a:	f8 94       	cli
+
+0000084c <__stop_program>:
+ 84c:	ff cf       	rjmp	.-2      	; 0x84c <__stop_program>
