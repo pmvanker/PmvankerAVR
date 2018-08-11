@@ -1,2 +1,3 @@
 # PmvankerAVR
-my avr code
+Headers =  all Header files
+Projects = all Diff Project
